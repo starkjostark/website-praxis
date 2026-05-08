@@ -59,8 +59,9 @@
     }
     .nav-brand img {
       width: 58px;
-      height: auto;
+      height: 58px;
       border-radius: 50%;
+      object-fit: cover;
       background: var(--white);
       padding: 3px;
     }
@@ -429,12 +430,13 @@
   </a>
   <ul class="nav-links" id="navLinks">
     <li><button onclick="showPage('home')" id="nav-home">Heilpraxis</button></li>
-    <li><button onclick="showPage('omega')" id="nav-omega">Omega-Training</button></li>
-    <li><button onclick="showPage('aufstellung')" id="nav-aufstellung">Familienaufstellung</button></li>
+    <li><button onclick="showPage('heilmagnetismus')" id="nav-heilmagnetismus">Heilmagnetismus HMO<sup>®</sup></button></li>
     <li><button onclick="showPage('seelenheilung')" id="nav-seelenheilung">Seelenheilung</button></li>
-    <li><button onclick="showPage('heilmagnetismus')" id="nav-heilmagnetismus">Heilmagnetismus</button></li>
-    <li><button onclick="showPage('aktuell')" id="nav-aktuell">Aktuell &amp; Termine</button></li>
-    <li><button onclick="showPage('anfahrt')" id="nav-anfahrt">Anfahrt</button></li>
+    <li><button onclick="showPage('aufstellung')" id="nav-aufstellung">Familienaufstellung</button></li>
+    <li><button onclick="showPage('omega')" id="nav-omega">Omega-Training</button></li>
+    <li><button onclick="showPage('aktuell')" id="nav-aktuell">Seminare</button></li>
+    <li><button onclick="showPage('uebermich')" id="nav-uebermich">Über mich</button></li>
+    <li><button onclick="showPage('anfahrt')" id="nav-anfahrt">Kontakt &amp; Anfahrt</button></li>
   </ul>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menü öffnen">
     <span></span><span></span><span></span>
@@ -443,12 +445,13 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <button onclick="showPage('home'); closeMenu()">Heilpraxis</button>
-  <button onclick="showPage('omega'); closeMenu()">Omega-Gesundheitstraining</button>
-  <button onclick="showPage('aufstellung'); closeMenu()">Familienaufstellung</button>
+  <button onclick="showPage('heilmagnetismus'); closeMenu()">Heilmagnetismus HMO<sup>®</sup></button>
   <button onclick="showPage('seelenheilung'); closeMenu()">Seelenheilung</button>
-  <button onclick="showPage('heilmagnetismus'); closeMenu()">Heilmagnetismus</button>
-  <button onclick="showPage('aktuell'); closeMenu()">Aktuell &amp; Termine</button>
-  <button onclick="showPage('anfahrt'); closeMenu()">Anfahrt</button>
+  <button onclick="showPage('aufstellung'); closeMenu()">Familienaufstellung</button>
+  <button onclick="showPage('omega'); closeMenu()">Omega-Gesundheitstraining</button>
+  <button onclick="showPage('aktuell'); closeMenu()">Seminare</button>
+  <button onclick="showPage('uebermich'); closeMenu()">Über mich</button>
+  <button onclick="showPage('anfahrt'); closeMenu()">Kontakt &amp; Anfahrt</button>
 </div>
 
 <!-- ════════════════════════════════════ -->
@@ -696,6 +699,24 @@
 </section>
 
 <!-- ════════════════════════════════════ -->
+<!-- ÜBER MICH                           -->
+<!-- ════════════════════════════════════ -->
+<section class="page" id="page-uebermich">
+  <div class="container">
+    <div class="content-card">
+      <div class="section-header">
+        <span class="pill">Zur Person</span>
+        <h1>Über mich</h1>
+        <p>Elisabeth Maria Richter-Stark – Heilpraktikerin</p>
+      </div>
+      <div class="section-body">
+        <p>Hier können Sie bald mehr über Elisabeth Maria Richter-Stark, ihren Werdegang und ihre Arbeit erfahren.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════ -->
 <!-- IMPRESSUM                           -->
 <!-- ════════════════════════════════════ -->
 <section class="page" id="page-impressum">
@@ -784,7 +805,7 @@
 </footer>
 
 <script>
-  const pages = ['home','omega','aufstellung','seelenheilung','heilmagnetismus','aktuell','anfahrt','impressum'];
+  const pages = ['home','omega','aufstellung','seelenheilung','heilmagnetismus','aktuell','anfahrt','impressum','uebermich'];
 
   function showPage(name) {
     pages.forEach(p => {
