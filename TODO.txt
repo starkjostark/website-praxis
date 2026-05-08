@@ -1,0 +1,2 @@
+- Leistungen in einem Menupunkt gruppieren in der oberen Leiste, im Burger menu kann es auch einzeln bleiben
+- Zur Person Pille entfernen in ueber mich
