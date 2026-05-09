@@ -402,7 +402,88 @@
       flex-wrap: wrap;
     }
 
-    /* ── Responsive ── */
+    /* ── Dropdown ── */
+    .nav-dropdown {
+      position: relative;
+    }
+    .nav-dropdown > button {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .chevron {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid rgba(255,255,255,0.7);
+      border-bottom: 2px solid rgba(255,255,255,0.7);
+      transform: rotate(45deg);
+      transition: transform 0.2s;
+      margin-bottom: 3px;
+      flex-shrink: 0;
+    }
+    .nav-dropdown.open .chevron { transform: rotate(-135deg); margin-bottom: -2px; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 32px rgba(45,90,90,0.18);
+      min-width: 230px;
+      overflow: hidden;
+      z-index: 2000;
+      border: 1px solid rgba(45,90,90,0.1);
+    }
+    .nav-dropdown.open .dropdown-menu { display: block; }
+    .dropdown-menu button {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1.2rem;
+      color: var(--text) !important;
+      font-size: 0.85rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+      background: none !important;
+      border: none;
+      border-bottom: 1px solid rgba(45,90,90,0.06);
+      border-radius: 0 !important;
+      cursor: pointer;
+      text-align: left;
+      letter-spacing: normal;
+      transition: background 0.15s, color 0.15s;
+    }
+    .dropdown-menu button:last-child { border-bottom: none; }
+    .dropdown-menu button:hover { background: var(--warm) !important; color: var(--teal) !important; }
+    .dropdown-menu button.active { color: var(--teal) !important; font-weight: 600; }
+
+    /* Mobile menu tree group */
+    .mobile-group-label {
+      display: block;
+      width: 100%;
+      padding: 0.9rem 1.5rem 0.5rem;
+      color: var(--gold-lt);
+      font-size: 0.72rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.12);
+    }
+    .mobile-sub button {
+      padding-left: 2.4rem !important;
+      font-size: 0.88rem !important;
+      border-left: 2px solid rgba(212,164,76,0.3);
+      margin-left: 1.5rem;
+      width: calc(100% - 1.5rem) !important;
+    }
+    .mobile-sub button::before {
+      content: '›  ';
+      opacity: 0.5;
+    }
     @media (max-width: 720px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
@@ -431,10 +512,15 @@
   </a>
   <ul class="nav-links" id="navLinks">
     <li><button onclick="showPage('home')" id="nav-home">Heilpraxis</button></li>
-    <li><button onclick="showPage('heilmagnetismus')" id="nav-heilmagnetismus">Heilmagnetismus HMO<sup>®</sup></button></li>
-    <li><button onclick="showPage('seelenheilung')" id="nav-seelenheilung">Seelenheilung</button></li>
-    <li><button onclick="showPage('aufstellung')" id="nav-aufstellung">Familienaufstellung</button></li>
-    <li><button onclick="showPage('omega')" id="nav-omega">Omega-Training</button></li>
+    <li class="nav-dropdown" id="dropdownItem">
+      <button onclick="toggleDropdown(event)">Leistungen <span class="chevron"></span></button>
+      <div class="dropdown-menu">
+        <button onclick="showPage('heilmagnetismus'); closeDropdown()" id="nav-heilmagnetismus">Heilmagnetismus HMO<sup>®</sup></button>
+        <button onclick="showPage('seelenheilung'); closeDropdown()" id="nav-seelenheilung">Seelenheilung</button>
+        <button onclick="showPage('aufstellung'); closeDropdown()" id="nav-aufstellung">Familienaufstellung</button>
+        <button onclick="showPage('omega'); closeDropdown()" id="nav-omega">Omega-Training</button>
+      </div>
+    </li>
     <li><button onclick="showPage('aktuell')" id="nav-aktuell">Seminare</button></li>
     <li><button onclick="showPage('uebermich')" id="nav-uebermich">Über mich</button></li>
     <li><button onclick="showPage('anfahrt')" id="nav-anfahrt">Kontakt &amp; Anfahrt</button></li>
@@ -446,10 +532,13 @@
 
 <div class="mobile-menu" id="mobileMenu">
   <button onclick="showPage('home'); closeMenu()">Heilpraxis</button>
-  <button onclick="showPage('heilmagnetismus'); closeMenu()">Heilmagnetismus HMO<sup>®</sup></button>
-  <button onclick="showPage('seelenheilung'); closeMenu()">Seelenheilung</button>
-  <button onclick="showPage('aufstellung'); closeMenu()">Familienaufstellung</button>
-  <button onclick="showPage('omega'); closeMenu()">Omega-Gesundheitstraining</button>
+  <span class="mobile-group-label">Leistungen</span>
+  <div class="mobile-sub">
+    <button onclick="showPage('heilmagnetismus'); closeMenu()">Heilmagnetismus HMO<sup>®</sup></button>
+    <button onclick="showPage('seelenheilung'); closeMenu()">Seelenheilung</button>
+    <button onclick="showPage('aufstellung'); closeMenu()">Familienaufstellung</button>
+    <button onclick="showPage('omega'); closeMenu()">Omega-Gesundheitstraining</button>
+  </div>
   <button onclick="showPage('aktuell'); closeMenu()">Seminare</button>
   <button onclick="showPage('uebermich'); closeMenu()">Über mich</button>
   <button onclick="showPage('anfahrt'); closeMenu()">Kontakt &amp; Anfahrt</button>
@@ -1088,7 +1177,19 @@
     document.getElementById('mobileMenu').classList.remove('open');
     document.getElementById('hamburger').classList.remove('open');
   }
+  function toggleDropdown(e) {
+    e.stopPropagation();
+    const item = document.getElementById('dropdownItem');
+    item.classList.toggle('open');
+  }
+  function closeDropdown() {
+    document.getElementById('dropdownItem').classList.remove('open');
+  }
+
+  // Close dropdown on outside click
   document.addEventListener('click', e => {
+    const item = document.getElementById('dropdownItem');
+    if (item && !item.contains(e.target)) closeDropdown();
     const menu = document.getElementById('mobileMenu');
     const burger = document.getElementById('hamburger');
     if (!menu.contains(e.target) && !burger.contains(e.target)) closeMenu();
